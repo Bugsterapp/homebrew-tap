@@ -1,19 +1,19 @@
 class Bugster < Formula
     desc "Bugster CLI"
     homepage "https://github.com/Bugsterapp/bugster-cli"
-    version "0.6.8"
+    version "0.7.0"
   
     depends_on "node@18"
   
     on_macos do
       if Hardware::CPU.intel?
-        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.6.8/bugster-macos-intel.zip"
-        sha256 "41d23ffb5cb45329a228fad5c07ac7ec705ae653ba25c45d63d036ce1c5595bf"
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.0/bugster-macos-intel.zip"
+        sha256 "633b4dc6dd28efa72bd95253ed81213df0306ba48cd74c741571050fbbc3590e"
       end
   
       if Hardware::CPU.arm?
-        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.6.8/bugster-macos-arm64.zip"
-        sha256 "ba3abf71d440e162d174a262a8ba5209ccbe2e82f1892564d53b8b5eb93c0638"
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.0/bugster-macos-arm64.zip"
+        sha256 "1921230205ba00c228fec4221aab806d575153657334cfef9d6365ad19ba39a7"
       end
     end
   
@@ -27,6 +27,6 @@ class Bugster < Formula
   
     test do
       output = shell_output("#{bin}/bugster --version")
-      assert_match "0.6.8", output
+      assert_match "0.7.0", output
     end
   end
