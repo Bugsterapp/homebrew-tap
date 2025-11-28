@@ -4,6 +4,14 @@ This is a Homebrew tap for installing [Bugster CLI](https://github.com/Bugsterap
 
 ## Installation
 
+### Direct installation (recommended)
+
+```bash
+brew install Bugsterapp/homebrew-tap/bugster
+```
+
+### Manual tap installation
+
 ```bash
 brew tap Bugsterapp/homebrew-tap
 brew install bugster
