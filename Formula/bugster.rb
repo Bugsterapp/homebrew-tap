@@ -18,7 +18,7 @@ class Bugster < Formula
     end
   
     def install
-      system "npx", "-y", "playwright@1.58.0-alpha-17637579710009", "install", "--with-deps", "chrome"
+      system "npx", "-y", "playwright@1.58.0-alpha-1763757971000", "install", "--with-deps", "chrome"
       system "npx", "-y", "playwright@1.58.0-alpha-1763757971000", "install", "ffmpeg"
       system "npx", "-y", "@playwright/mcp@0.0.48", "--version" rescue nil
 
