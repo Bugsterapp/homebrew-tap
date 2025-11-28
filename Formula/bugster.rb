@@ -3,6 +3,8 @@ class Bugster < Formula
     homepage "https://github.com/Bugsterapp/bugster-cli"
     version "0.6.7"
   
+    depends_on "node@18"
+  
     on_macos do
       if Hardware::CPU.intel?
         url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.6.7/bugster-macos-intel.zip"
@@ -15,19 +17,15 @@ class Bugster < Formula
       end
     end
   
-    # Opcional: si más adelante tenés builds para Linux con Homebrew/Linuxbrew
-    # on_linux do
-    #   url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.6.7/bugster-linux.zip"
-    #   sha256 "PONÉ_ACÁ_SHA256_DE_LA_ZIP_LINUX"
-    # end
-  
     def install
-      # Si el zip contiene solo el binario `bugster`:
+      system "npx", "-y", "playwright@1.58.0-alpha-17637579710009", "install", "--with-deps", "chrome"
+      system "npx", "-y", "playwright@1.58.0-alpha-1763757971000", "install", "ffmpeg"
+      system "npx", "-y", "@playwright/mcp@0.0.48", "--version" rescue nil
+
       bin.install "bugster"
     end
   
     test do
-      # Test muy básico para que Homebrew pueda verificar la instalación
       output = shell_output("#{bin}/bugster --version")
       assert_match "0.6.7", output
     end

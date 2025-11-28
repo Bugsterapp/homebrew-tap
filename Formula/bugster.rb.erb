@@ -1,0 +1,32 @@
+class Bugster < Formula
+    desc "Bugster CLI"
+    homepage "https://github.com/Bugsterapp/bugster-cli"
+    version "<%= bugster_version_no_v %>"
+  
+    depends_on "node@18"
+  
+    on_macos do
+      if Hardware::CPU.intel?
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/<%= bugster_version %>/bugster-macos-intel.zip"
+        sha256 "<%= sha256_intel %>"
+      end
+  
+      if Hardware::CPU.arm?
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/<%= bugster_version %>/bugster-macos-arm64.zip"
+        sha256 "<%= sha256_arm64 %>"
+      end
+    end
+  
+    def install
+      system "npx", "-y", "playwright@<%= playwright_version %>", "install", "--with-deps", "chrome"
+      system "npx", "-y", "playwright@<%= playwright_version %>", "install", "ffmpeg"
+      system "npx", "-y", "@playwright/mcp@<%= playwright_mcp_version %>", "--version" rescue nil
+
+      bin.install "bugster"
+    end
+  
+    test do
+      output = shell_output("#{bin}/bugster --version")
+      assert_match "<%= bugster_version_no_v %>", output
+    end
+  end
