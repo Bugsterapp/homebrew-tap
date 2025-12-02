@@ -16,6 +16,11 @@ class Bugster < Formula
         sha256 "<%= sha256_arm64 %>"
       end
     end
+
+    on_linux do
+      url "https://github.com/Bugsterapp/bugster-cli/releases/download/<%= bugster_version %>/bugster-linux.zip"
+      sha256 "<%= sha256_linux %>"
+    end
   
     def install
       system "npx", "-y", "playwright@<%= playwright_version %>", "install", "--with-deps", "chrome"

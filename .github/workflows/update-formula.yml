@@ -25,6 +25,7 @@ jobs:
           PLAYWRIGHT_MCP_VERSION="${{ github.event.client_payload.playwright_mcp_version }}"
           SHA256_INTEL="${{ github.event.client_payload.sha256_intel }}"
           SHA256_ARM64="${{ github.event.client_payload.sha256_arm64 }}"
+          SHA256_LINUX="${{ github.event.client_payload.sha256_linux }}"
           
           # Remove 'v' prefix if present for version field (Homebrew doesn't use it)
           VERSION_NO_V="${BUGSTER_VERSION#v}"
@@ -35,6 +36,7 @@ jobs:
           echo "playwright_mcp_version=$PLAYWRIGHT_MCP_VERSION" >> "$GITHUB_OUTPUT"
           echo "sha256_intel=$SHA256_INTEL" >> "$GITHUB_OUTPUT"
           echo "sha256_arm64=$SHA256_ARM64" >> "$GITHUB_OUTPUT"
+          echo "sha256_linux=$SHA256_LINUX" >> "$GITHUB_OUTPUT"
           
           echo "Extracted versions and SHA256:"
           echo "  Bugster: $BUGSTER_VERSION (formula version: $VERSION_NO_V)"
@@ -42,6 +44,7 @@ jobs:
           echo "  Playwright MCP: $PLAYWRIGHT_MCP_VERSION"
           echo "  SHA256 Intel: $SHA256_INTEL"
           echo "  SHA256 ARM64: $SHA256_ARM64"
+          echo "  SHA256 Linux: $SHA256_LINUX"
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -56,6 +59,7 @@ jobs:
           MCP_VERSION: ${{ steps.versions.outputs.playwright_mcp_version }}
           SHA256_INTEL: ${{ steps.versions.outputs.sha256_intel }}
           SHA256_ARM64: ${{ steps.versions.outputs.sha256_arm64 }}
+          SHA256_LINUX: ${{ steps.versions.outputs.sha256_linux }}
         run: |
           # Generate formula from ERB template using Ruby
           ruby <<'RUBY'
@@ -67,6 +71,7 @@ jobs:
           playwright_mcp_version = ENV['MCP_VERSION']
           sha256_intel = ENV['SHA256_INTEL']
           sha256_arm64 = ENV['SHA256_ARM64']
+          sha256_linux = ENV['SHA256_LINUX']
           
           template = File.read('Formula/bugster.rb.erb')
           result = ERB.new(template).result(binding)
