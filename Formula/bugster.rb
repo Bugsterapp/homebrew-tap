@@ -1,37 +1,37 @@
 class Bugster < Formula
     desc "Bugster CLI"
     homepage "https://github.com/Bugsterapp/bugster-cli"
-    version "0.7.11"
+    version "0.7.12"
   
     depends_on "node@18"
   
     on_macos do
       if Hardware::CPU.intel?
-        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.11/bugster-macos-intel.zip"
-        sha256 "a154eec412bd0f036fd9934e3c2d047443451211a5ef2948822b31c939c303b8"
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.12/bugster-macos-intel.zip"
+        sha256 "8e75bf6c9421a924831f249cae33a9be09c214cac61110a8e7f266db8d9b3493"
       end
   
       if Hardware::CPU.arm?
-        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.11/bugster-macos-arm64.zip"
-        sha256 "9c0515add0d4cf8b3aeae03a3724635302d9f62018311a99d9c5c0f29beba53b"
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.12/bugster-macos-arm64.zip"
+        sha256 "ec73f5a7403bfe60362ff75574df76432d9243f535616ecf7926569716181809"
       end
     end
 
     on_linux do
-      url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.11/bugster-linux.zip"
-      sha256 "85390cc6ccef2eee14539909e1d144b3c2aa8b721397a93c2f69178bef38b49d"
+      url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.7.12/bugster-linux.zip"
+      sha256 "080fd9fb85ccea38856fe2bc97ad15632e83967d8bea1e9bd63e7c41f9635590"
     end
   
     def install
-      system "npx", "-y", "playwright@1.59.0-alpha-1770157258000", "install", "--with-deps", "chrome"
-      system "npx", "-y", "playwright@1.59.0-alpha-1770157258000", "install", "ffmpeg"
-      system "npx", "-y", "@playwright/mcp@0.0.63", "--version" rescue nil
+      system "npx", "-y", "playwright@1.59.0-alpha-1770338664000", "install", "--with-deps", "chrome"
+      system "npx", "-y", "playwright@1.59.0-alpha-1770338664000", "install", "ffmpeg"
+      system "npx", "-y", "@playwright/mcp@0.0.64", "--version" rescue nil
 
       bin.install "bugster"
     end
   
     test do
       output = shell_output("#{bin}/bugster --version")
-      assert_match "0.7.11", output
+      assert_match "0.7.12", output
     end
   end
