@@ -1,25 +1,25 @@
 class Bugster < Formula
     desc "Bugster CLI"
     homepage "https://github.com/Bugsterapp/bugster-cli"
-    version "0.8.4"
+    version "0.8.5"
   
     depends_on "node@18"
   
     on_macos do
       if Hardware::CPU.intel?
-        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.8.4/bugster-macos-intel.zip"
-        sha256 "ef0d4eb48a7aa7f9321a77684413d75b1beddf452baa45a5c73480d9a9ba8d37"
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.8.5/bugster-macos-intel.zip"
+        sha256 "48845c6d94b9a2e1b3c2a0f33b07b379ca536039cd6a82e31736284d6ded444f"
       end
   
       if Hardware::CPU.arm?
-        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.8.4/bugster-macos-arm64.zip"
-        sha256 "8de76b05febecccf644f21425d9bc36845784f019096c7774b02ac1d61e831c5"
+        url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.8.5/bugster-macos-arm64.zip"
+        sha256 "5e32388e269e8749f674566b120585d63017d46c56934f47a80ae97f36d68a1b"
       end
     end
 
     on_linux do
-      url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.8.4/bugster-linux.zip"
-      sha256 "e65adb196773ea4250a5a3af48583f6ada9414a03d89e2075aee98267a257442"
+      url "https://github.com/Bugsterapp/bugster-cli/releases/download/v0.8.5/bugster-linux.zip"
+      sha256 "ac0faba7cf01481769f117e95d4da35cf664eaffab5118876192cc1479ae38ca"
     end
   
     def install
@@ -32,6 +32,6 @@ class Bugster < Formula
   
     test do
       output = shell_output("#{bin}/bugster --version")
-      assert_match "0.8.4", output
+      assert_match "0.8.5", output
     end
   end
